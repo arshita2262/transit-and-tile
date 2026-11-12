@@ -1,166 +1,212 @@
-# Transit & Tile
+# Transit & Tile - Hotel Booking Portal
 
-A fresher-level, full-stack hotel booking portal built with **Java 17 · Spring Boot 3.3.6 · MySQL 8 · React 19 · Bootstrap 5**.
+A full-stack hotel booking application built with Java, Spring Boot, MySQL, React, and Vite. Users can search hotels, check room availability, make reservations, view booking details, and cancel bookings.
 
----
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Backend | Java 17, Spring Boot 3.3.6 |
+| Backend architecture | Spring MVC, Spring Data JPA, Hibernate |
+| Database | MySQL 8 |
+| Frontend | React 19, React Router 7 |
+| Styling | Bootstrap 5, custom CSS |
+| Build tools | Maven, Vite, npm |
+| Testing | JUnit 5, Mockito, Spring Boot Test |
+
+## Features
+
+- Search hotels by destination and travel dates.
+- View hotel details, amenities, room information, and pricing.
+- Check room availability for selected dates.
+- Create bookings with customer details.
+- Generate a unique booking reference for each reservation.
+- Calculate booking prices on the backend.
+- Look up reservations using booking reference and email.
+- Cancel existing reservations.
+- View booking confirmation as a travel-themed postcard.
+- Download the booking confirmation postcard as a PNG image.
+- View and filter bookings in the My Bookings section.
+
+## Application Screens
+
+1. Home
+2. Search Results
+3. Hotel Details
+4. Booking Details
+5. Booking Confirmation
+6. My Bookings
 
 ## Prerequisites
 
-| Tool | Required Version | Notes |
-|------|-----------------|-------|
-| Java JDK | 17+ | Project targets Java 17; tested on JDK 25.0.1 |
-| Apache Maven | 3.9+ | Used to build and run the backend |
-| MySQL Community Server | 8.0+ | Local instance; must be running before starting the backend |
-| Node.js | 18+ | Required for the React frontend |
-| npm | 9+ | Bundled with Node; used to install frontend dependencies |
+Install the following before running the application:
 
----
+| Software | Required version |
+|---|---|
+| Java JDK | 17 or later |
+| Apache Maven | 3.9 or later |
+| MySQL Community Server | 8.0 or later |
+| Node.js | 18 or later |
+| npm | 9 or later |
 
-## Environment setup
+TRANSIT_AND_TILE_workspace/
+├── backend/
+│   ├── pom.xml
+│   └── src/
+│       ├── main/
+│       │   ├── java/com/transitandtile/
+│       │   └── resources/
+│       │       ├── application.properties
+│       │       ├── schema.sql
+│       │       └── data.sql
+│       └── test/
+│           └── java/com/transitandtile/
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── pages/
+│       ├── components/
+│       ├── services/
+│       ├── utils/
+│       └── styles/
+├── .env.example
+├── .gitignore
+├── README.md
+└── DESIGN.md
 
-The backend reads all database credentials from environment variables.  
-**Never put real credentials in any committed file.**
+## Database Setup
 
-1. Copy the example file and fill in your local MySQL credentials:
-
-   ```bash
-   cp .env.example .env
-   # Edit .env with your real values
-   ```
-
-2. Required environment variables:
-
-   | Variable | Description | Default used if omitted |
-   |----------|-------------|------------------------|
-   | `DB_HOST` | MySQL host | `localhost` |
-   | `DB_PORT` | MySQL port | `3306` |
-   | `DB_NAME` | MySQL schema/database name | `transit_and_tile_db` |
-   | `DB_USERNAME` | MySQL username | *(no default — required)* |
-   | `DB_PASSWORD` | MySQL password | *(no default — required)* |
-
----
-
-## Database setup
-
-Before starting the backend, create the MySQL schema:
+1. Start your MySQL server.
+2. Create the application database:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS transit_and_tile_db
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
 ```
 
-Log in to MySQL and run the above, or run:
+3. The backend automatically executes the following SQL scripts at startup:
 
-```bash
-mysql -u <your_username> -p -e "CREATE DATABASE IF NOT EXISTS transit_and_tile_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-```
+- `backend/src/main/resources/schema.sql` - Creates the HOTEL, ROOM_TYPE, and BOOKING tables.
+- `backend/src/main/resources/data.sql` - Inserts five sample hotels and their corresponding room categories.
 
-> Table creation and sample data SQL scripts will be added in Phase 2.
+The database contains one room category per hotel in the current implementation.
 
----
+## Environment Variables
 
-## Running the backend
+The backend reads database connection details from environment variables. Do not commit real database credentials.
 
-### Option A — PowerShell (Windows)
+Required variables:
+
+| Variable | Description | Default |
+|---|---|---|
+| `DB_HOST` | MySQL host | localhost |
+| `DB_PORT` | MySQL port | 3306 |
+| `DB_NAME` | Database name | transit_and_tile_db |
+| `DB_USERNAME` | MySQL username | Required |
+| `DB_PASSWORD` | MySQL password | Required |
+
+### Windows PowerShell setup
+
+Open PowerShell and set the variables:
 
 ```powershell
-$env:DB_USERNAME="your_mysql_username"
-$env:DB_PASSWORD="your_mysql_password"
-# Optional overrides:
-# $env:DB_HOST="localhost"
-# $env:DB_PORT="3306"
-# $env:DB_NAME="transit_and_tile"
+$env:DB_HOST = "localhost"
+$env:DB_PORT = "3306"
+$env:DB_NAME = "transit_and_tile_db"
+$env:DB_USERNAME = "root"
+$env:DB_PASSWORD = "your_mysql_password"
+```
 
+Replace the username and password with your local MySQL credentials. These values are for your local terminal session and should not be committed to Git.
+
+## Running the Backend
+
+From the project root:
+
+```powershell
 cd backend
 mvn spring-boot:run
 ```
 
-### Option B — Command Prompt (Windows)
+The Spring Boot application starts at:
 
-```cmd
-set DB_USERNAME=your_mysql_username
-set DB_PASSWORD=your_mysql_password
-cd backend
-mvn spring-boot:run
-```
+`http://localhost:8081`
 
-The backend starts on **http://localhost:8081**.
+Keep the backend terminal running.
 
----
+## Running the Frontend
 
-## Running the frontend
+Open a second terminal from the project root:
 
-```bash
+```powershell
 cd frontend
-npm install        # already done if node_modules exists
+npm install
 npm run dev
 ```
 
-The frontend dev server starts on **http://localhost:5173**.
+The frontend runs at:
 
-The Vite dev server proxies `/api` requests to `http://localhost:8081` automatically — no manual CORS configuration is needed during development.
+`http://localhost:5173`
 
----
+The Vite development server proxies API requests to the backend at port 8081.
 
-## Running backend tests
+## Running Tests
 
-```bash
-cd backend
-mvn test
+### Backend tests
+
+From the backend directory:
+
+```powershell
+mvn clean test
 ```
 
-The context-load smoke test uses H2 in-memory mode and does **not** require a running MySQL instance.
+The test suite covers application context loading, controllers, services, repositories, booking integration, availability, and concurrency behaviour.
 
-> MySQL integration tests (overlap queries, locking, concurrency) will be added in Phase 3–4 and require a live MySQL connection.
+**Note:** MySQL integration and concurrency tests require a running MySQL instance and the configured database credentials. H2 is used for the application context smoke test; it does not replace MySQL/InnoDB concurrency testing.
 
----
+### Frontend linting
 
-## Stack decisions
+From the frontend directory:
 
-| Decision | Choice | Reason |
-|----------|--------|--------|
-| Spring Boot version | 3.3.6 | Latest stable release line compatible with Java 17+ |
-| Java version target | 17 | Project specification requirement |
-| MySQL connector | `com.mysql:mysql-connector-j` (managed by Spring Boot parent) | Recommended connector for Spring Boot 3 + MySQL 8 |
-| Frontend bundler | Vite 8 | Pre-installed in the project; fast HMR |
-| HTTP client | Browser Fetch API | Agreed in SKILL.md; no extra dependency |
-
----
-
-## Project structure
-
-```
-TRANSIT_AND_TILE_workspace/
-├── SKILL.md                  # Persistent engineering instructions
-├── architecture.md           # Technical architecture blueprint
-├── implementation_plan.md    # Phased implementation checklist
-├── README.md                 # This file
-├── DESIGN.md                 # (created during Phase 2+)
-├── .gitignore
-├── .env.example              # Safe credential placeholder
-├── backend/
-│   ├── pom.xml               # Maven project (Spring Boot 3.3.6, Java 17)
-│   └── src/
-│       ├── main/java/com/transitandtile/
-│       │   └── TransitAndTileApplication.java
-│       ├── main/resources/
-│       │   └── application.properties
-│       └── test/java/com/transitandtile/
-│           └── TransitAndTileApplicationTests.java
-└── frontend/
-    ├── package.json          # React 19, Bootstrap 5, React Router 7, Vite 8
-    ├── vite.config.js
-    └── src/
-        ├── App.jsx
-        └── main.jsx
+```powershell
+npm run lint
 ```
 
----
+### Frontend production build
 
-## Known limitations (Phase 1)
+```powershell
+npm run build
+```
 
-- No business endpoints exist yet (Phase 2 onwards).
-- Schema creation SQL will be provided in Phase 2.
-- MySQL integration tests are not yet written; the smoke test uses H2.
-- Frontend shows the default Vite/React template page; real screens are built in Phase 6.
+## Design and Implementation
+
+- The backend exposes REST APIs for hotel search, availability, booking, reservation lookup, and cancellation.
+- Spring Data JPA and Hibernate handle database persistence.
+- Booking prices are calculated by the backend using the selected room's price and stay duration.
+- Availability checks consider overlapping booking dates.
+- Pessimistic database locking is used in the booking flow to protect room inventory during concurrent booking attempts.
+- The frontend communicates with the backend through HTTP requests.
+- The booking confirmation postcard provides a downloadable visual summary of the reservation.
+
+For further details about the architecture, database design, API design, booking logic, assumptions, and limitations, see `DESIGN.md`.
+
+## Assumptions and Limitations
+
+- The application uses fictional sample hotel data for demonstration.
+- Each hotel currently has one room category.
+- User authentication and online payment processing are not implemented.
+- Booking lookup uses a booking reference and the associated email address.
+- The application is a demonstration project and is not configured as a production hotel reservation platform.
+- The postcard's weather information is illustrative and should not be treated as a live weather forecast.
+
+## Future Improvements
+
+- Add customer authentication and account management.
+- Integrate a secure payment gateway.
+- Support multiple room categories and room-level inventory.
+- Add hotel and booking administration features.
+- Integrate a live weather API.
+- Add email notifications for booking confirmation and cancellation.
+- Deploy the application with production-grade configuration and monitoring.
