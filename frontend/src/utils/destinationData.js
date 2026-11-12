@@ -43,7 +43,7 @@ export const DESTINATION_DETAILS = {
   manali: {
     name: 'Manali',
     tagline: 'Valley of the Gods',
-    greeting: 'Greetings from the Snowcapped Pines of Himachal!',
+    greeting: 'Ram Ram Ji! Warm Greetings from the Snowcapped Pines of Himachal!',
     illustrativeWeather: {
       temp: '14°C',
       condition: 'Crisp Mountain Breeze',
@@ -61,7 +61,7 @@ export const DESTINATION_DETAILS = {
   munnar: {
     name: 'Munnar',
     tagline: 'Misty Tea Hills of God’s Own Country',
-    greeting: 'Vanakkam! Enchanting Misty Greetings from the Tea Estates!',
+    greeting: 'Namaskaram! Enchanting Misty Greetings from the Tea Estates!',
     illustrativeWeather: {
       temp: '18°C',
       condition: 'Cool & Rolling Mist',

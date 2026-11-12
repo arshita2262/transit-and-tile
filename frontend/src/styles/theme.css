@@ -249,75 +249,214 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Postcard Vintage Styles
+   Postcard — Premium Travel-Journal Aesthetic
    ───────────────────────────────────────────────────────────────────────── */
 .tt-postcard-wrapper {
-  perspective: 1200px;
-  max-width: 760px;
+  max-width: 820px;
   margin: 0 auto;
 }
 
+/* Outer card shell: linen texture via grain overlay */
 .tt-postcard {
-  background-color: var(--tt-cream);
-  border: 1px solid #e7ded4;
-  border-radius: 12px;
-  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.05);
+  background-color: #fdf8f0;
+  border: 1px solid #ddd0be;
+  border-radius: 16px;
+  box-shadow:
+    0 20px 60px rgba(15, 23, 42, 0.14),
+    0 4px 12px rgba(15, 23, 42, 0.07),
+    inset 0 0 0 1px rgba(255,255,255,0.6);
   position: relative;
   overflow: hidden;
-  padding: 2.25rem;
-  background-image: 
-    radial-gradient(#d6c9b8 0.6px, transparent 0.6px),
-    radial-gradient(#d6c9b8 0.6px, var(--tt-cream) 0.6px);
-  background-size: 24px 24px;
-  background-position: 0 0, 12px 12px;
+  padding: 0;
 }
 
+/* Destination hero banner — color injected via inline style */
+.tt-postcard-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 2rem 1.2rem;
+  position: relative;
+}
+
+.tt-postcard-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.04) 100%);
+  pointer-events: none;
+}
+
+.tt-postcard-hero-text {
+  position: relative;
+  z-index: 1;
+}
+
+.tt-postcard-hero-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tt-postcard-destination-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  margin: 0;
+}
+
+.tt-postcard-tagline {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.88);
+  font-style: italic;
+  letter-spacing: 0.5px;
+  margin: 0.2rem 0 0;
+}
+
+/* Postcard body below hero */
+.tt-postcard-body {
+  padding: 1.75rem 2rem 1.5rem;
+  background: #fdf8f0;
+  /* subtle grain texture */
+  background-image:
+    radial-gradient(#d9cfc0 0.5px, transparent 0.5px),
+    radial-gradient(#d9cfc0 0.5px, #fdf8f0 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+/* Stamp */
 .tt-stamp-badge {
-  width: 90px;
-  height: 110px;
-  border: 2px dashed #94a3b8;
-  background: #ffffff;
+  width: 86px;
+  height: 106px;
+  border: 2px dashed rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(4px);
   padding: 0.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   transform: rotate(3deg);
+  border-radius: 2px;
 }
 
+.tt-stamp-badge .tt-stamp-label {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tt-stamp-badge .tt-stamp-brand {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.58rem;
+  font-weight: 600;
+}
+
+/* Circular Postmark */
 .tt-postmark {
-  border: 2px solid #64748b;
+  border: 2px solid rgba(255,255,255,0.7);
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  color: #475569;
+  color: rgba(255,255,255,0.9);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transform: rotate(-12deg);
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
+/* Dashed column divider */
 .tt-postcard-divider {
-  border-right: 1.5px dashed #cbd5e1;
+  border-right: 1.5px dashed #c8bfb0;
+}
+
+/* Booking reference block */
+.tt-postcard-ref-block {
+  background: #ffffff;
+  border: 1px solid #e2d9cc;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Address block */
+.tt-postcard-address {
+  border-left: 3px solid;
+  padding-left: 0.85rem;
+}
+
+/* Greeting typography */
+.tt-postcard-greeting {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.08rem;
+  font-style: italic;
+  color: #3d2f1a;
+  line-height: 1.4;
+  margin: 0 0 0.75rem;
+}
+
+/* Pricing rows */
+.tt-postcard-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #64748b;
+  padding: 0.2rem 0;
+}
+
+.tt-postcard-price-row.total {
+  border-top: 1px solid #e2d9cc;
+  margin-top: 0.3rem;
+  padding-top: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+/* Weather sample strip */
+.tt-postcard-weather {
+  background: rgba(255,255,255,0.65);
+  border: 1px solid #e2d9cc;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
 }
 
 @media (max-width: 768px) {
   .tt-postcard-divider {
     border-right: none;
-    border-bottom: 1.5px dashed #cbd5e1;
+    border-bottom: 1.5px dashed #c8bfb0;
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  .tt-postcard {
+  .tt-postcard-destination-name {
+    font-size: 1.5rem;
+  }
+  .tt-postcard-hero {
+    padding: 1.1rem 1.25rem 1rem;
+  }
+  .tt-postcard-body {
     padding: 1.25rem;
+  }
+  .tt-postmark {
+    display: none;
   }
 }
 
