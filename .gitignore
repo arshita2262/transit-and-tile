@@ -1,0 +1,60 @@
+# =============================================================================
+# Transit & Tile — .gitignore
+# =============================================================================
+
+# --- Maven build output ---
+backend/target/
+*.class
+*.jar
+*.war
+
+# --- IDE files ---
+.idea/
+*.iml
+.vscode/
+*.suo
+*.user
+.project
+.classpath
+.settings/
+
+# --- Node / Frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Environment / secrets (NEVER commit real credentials) ---
+.env
+.env.local
+.env.*.local
+backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-secret.properties
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Test output ---
+backend/target/surefire-reports/
+backend/target/failsafe-reports/
+
+# --- Hibernate / JPA ---
+*.hbm.xml
+# All local environment files
+.env*
+!.env.example
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+
+# Maven output
+target/
+
+# Local database dumps
+*.sql.bak
+*.dump
