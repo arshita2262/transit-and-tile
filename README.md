@@ -59,8 +59,7 @@ TRANSIT_AND_TILE_workspace/
 │       │       ├── application.properties
 │       │       ├── schema.sql
 │       │       └── data.sql
-│       └── test/
-│           └── java/com/transitandtile/
+│       └── test/java/com/transitandtile/
 ├── frontend/
 │   ├── package.json
 │   ├── vite.config.js
